@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Ubuntu:wght@500&display=swap');
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	text-decoration: none;
+	list-style: none;
+	font-family: 'Abel', sans-serif;
+}
+
+*::after,
+*::before {
+	transition: .5s linear;
+}
+
+@font-face {
+	font-family: Levitation;
+	src: url(fonts/glossy.ttf)
+}
+
+.game-menu {
+	width: 100%;
+	min-height: 100vh;
+	background: url(img/screen-5.png);
+	background-size: cover;
+	background-position: 20% 40%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 2rem;
+	position: absolute;
+	top: 0;
+}
+
+.game-instruction {
+	width: 100%;
+	padding: 2% 20%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	column-gap: 2rem;
+	position: relative;
+	z-index: 1
+}
+
+.game-instruction > button {
+	width: 150px;
+	height: 100px;
+	background: linear-gradient(#133264, #3779d3);
+	border: 3px solid gold;
+	box-shadow: 0 0 3px 2px black inset, 0 0 20px black, 6px -6px 0 gold;
+	cursor: pointer;
+	color: gold;
+	font-size: 1.2em;
+	border-radius: 50%;
+	position: relative;
+	overflow: hidden;
+	text-shadow: 0 0 2px black, 0 0 5px black;
+	transition: .5s;
+	font-family: Levitation;
+}
+
+.game-instruction > button:hover {
+	color: white;
+}
+
+.game-instruction > button:hover::after {
+	top: 0;
+	transform: rotate(360deg)
+}
+
+.game-instruction > button::after {
+	content: '';
+	position: absolute;
+	top: 63px;
+	right: -16px;
+	width: 100%;
+	height: 100%;
+	background: rgb(255 255 255 / 24%);
+	border-radius: 92%;
+	transform-origin: bottom
+}
+
+.overlay {
+	width: 100%;
+	min-height: 100vh;
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 0;
+}
+
+h1 {
+	font-size: 100px;
+	color: gold;
+	text-shadow: 0 0 2px black, 0 0 5px black, 0 0 10px black;
+	position: relative;
+	animation: text 1s ease-in infinite alternate;
+	font-family: Levitation;
+	line-height: 55px
+}
+
+@keyframes text {
+	to {
+		transform: translateY(40px);
+		color: white;
+	}
+}
+
+.game-menu > h2 {
+	color: white;
+	position: relative;
+}
+
+.board-container {
+	width: 100%;
+	min-height: 100vh;
+	background: #063646;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 30px 380px 30px auto;
+	grid-gap:1.5rem;
+	align-content: flex-start;
+	padding: 3%;
+}
+
+.board {
+	background-size: cover !important;
+	background-position: center center !important;
+	display: grid;
+	grid-template-columns: repeat(5,1fr);
+}
+
+.innerBoard {
+	background: radial-gradient(#b05454, #a23939 87%);
+    border: 2px solid #c2c2c24f;
+    box-shadow: 0 0 5px 4px #0d0d0d;
+	transition: .5s
+}
+
+.details-container {
+	width: 100%;
+	min-height: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: .9em;
+	color: #fff;
+}
+
+.details-container > .icons {
+	background: linear-gradient(steelblue,#002748);
+	padding: 3px;
+	color: white;
+	border-radius: 30px;
+	width: 30%;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap:2rem;
+	font-size: 1.8em;
+	border: 2px solid white;
+	box-shadow: 0 0 3px 2px #0d1936 inset;
+}
+
+.details-container > .icons:last-child {
+	font-size: 1.23em;
+	font-family: Levitation;
+	text-shadow: 0 0 2px black, 0 0 4px black
+}
+
+.activeLetters {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap:2px;
+
+}
+.letter {
+	width: 35px;
+	height: 35px;
+	background: linear-gradient(white,#9d9d9d);
+	border-radius: 2px;
+	display: grid;
+	place-items: center;
+	font-size: 1.5em;
+	box-shadow: 0 0 2px 1px black inset;
+	border: 2px solid steelblue;
+	transition: .3s ease-in;
+	transition-delay: calc(var(--i) * .1s);
+}
+
+.allLetters {
+	width: 100%;
+    background: linear-gradient(steelblue,#002748);
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    padding: 2%;
+    box-shadow: 0 0 3px 2px black inset;
+    border: 2px solid white;
+}
+
+.check {
+	height: 30px;
+    font-family: Levitation;
+    display: grid;
+    place-items: center;
+    border: 1px solid steelblue;
+    box-shadow: 0 0 2px 1px black inset;
+    color: #ffffff;
+    background: linear-gradient(90deg, #a23939 86%, #8a0000 50%);
+    font-size: 1.4em;
+}
+.icons > img {
+	width: 30%;
+}
+
+.allLetters > button {
+	grid-column: 6 / 8;
+	grid-row-start: 4;
+	background: orangered;
+	border: 1px solid steelblue;
+	box-shadow: 0 0 2px 1px black inset;
+	font-family: Levitation;
+	color: white;
+}
+
+.shake {
+    animation: shake 1s;
+
+}
+
+@keyframes shake {
+    20% {
+        transform: rotate(5deg);
+        background: darkred;
+		color: white;
+		text-shadow: 0 0 2px white, 0 0 5px white, 0 0 10px white, 0 0 20px white
+
+    }
+
+    50% {
+        transform: rotate(-5deg);
+        background: darkred;
+        color: white;
+		text-shadow: none;
+    }
+
+    80% {
+        transform: rotate(5deg);
+        background: darkred;
+		color: white;
+		text-shadow: 0 0 2px white, 0 0 5px white, 0 0 10px white, 0 0 20px white
+    }
+}
+
+
+@media screen and (max-width:400px) {
+	.game-menu {
+		background-size: 110%;
+		background-position: 64% 54%;
+		justify-content: flex-start;
+		padding:8%
+	}
+	h1 {
+		text-align: center;
+		font-size:60px;
+		margin-bottom: 50px
+	}
+	.game-instruction {
+		flex-direction: column;
+		row-gap:2rem;
+		
+	}
+	.game-instruction > button {
+		font-size: 1em;
+		width: 150px;
+		height: 60px;
+	}
+}
+
+.active {
+	pointer-events: none !important;
+	background: #212121 !important;
+	transition: .5s
+}
+
+.message {
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	backdrop-filter:blur(7px);
+	z-index: 555;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap:1rem;
+	font-size:30px;
+	color: orangered;
+	text-shadow: 0 0 2px black, 0 0 5px black;
+	text-align: center
+}
+.message > p {
+	background: white;
+	padding: 10px 10px;
+	border-radius: 30px;
+	width: 90%;
+}
+
+.message > button {
+	width: 40%;
+	height: 50px;
+	background: orangered;
+	box-shadow:  0 0 3px 2px black inset;
+	border-radius: 30px;
+	border: 2px solid white;
+	cursor: pointer;
+	color: white;
+	font-family: Levitation;
+	font-size: 30px
+}
+
+.categories {
+	width: 100%;
+	min-height: 100vh;
+	background: #04233c;
+	display: grid;
+	grid-template-columns: auto;
+	position: absolute;
+	align-content: flex-start;
+	top: 0;
+	padding: 3%;
+	grid-gap:.5rem
+}
+
+.category {
+	width: 100%;
+    height: 208px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #ffffff;
+    border: 2px solid white;
+	box-shadow: 0 0 3px 2px black inset;
+	border: 3px solid steelblue;
+	border-radius: 10px;
+}
+
+.category > span {
+	font-size: 1.5em;
+	background: white;
+	width: 100%;
+	text-align: center;
+	font-family: Levitation;
+	color: gold;
+	text-shadow: 0 0 2px black, 0 0 5px black;
+}
+
+.category > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
